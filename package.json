@@ -10,16 +10,37 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:vs-code-file-status.helloWorld"
+    "onCommand:vs-code-file-status.file-warning",
+    "onCommand:vs-code-file-status.file-error"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "vs-code-file-status.helloWorld",
-        "title": "Hello World"
+        "command": "vs-code-file-status.file-warning",
+        "title": "Hello World",
+        "category": "Hello",
+        "icon": "$(warning)"
+      },
+      {
+        "command": "vs-code-file-status.file-error",
+        "title": "Hello World",
+        "category": "Hello",
+        "icon": "$(error)"
       }
-    ]
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "vs-code-file-status.file-warning",
+          "group": "navigation"
+        },
+        {
+          "command": "vs-code-file-status.file-error",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
