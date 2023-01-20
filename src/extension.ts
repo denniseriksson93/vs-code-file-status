@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { ListUtilities } from './list-utilities';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -25,8 +26,23 @@ export function activate(context: vscode.ExtensionContext) {
         (r) => r.severity === vscode.DiagnosticSeverity.Warning
       );
 
+      const firstRowWithWarnings = ListUtilities.minBy(
+        allWarnings,
+        (p) => p.range.start.line
+      );
+
+      let editor = vscode.window.activeTextEditor;
+      if (editor) {
+        editor.selection = new vscode.Selection(
+          firstRowWithWarnings.range.start,
+          firstRowWithWarnings.range.end
+        );
+        editor.revealRange(firstRowWithWarnings.range);
+      }
+
       allWarnings.forEach((w) => {
         vscode.window.showInformationMessage(JSON.stringify(w.message));
+        vscode.window.showInformationMessage(JSON.stringify(w));
       });
     }
   );
