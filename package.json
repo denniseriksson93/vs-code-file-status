@@ -17,6 +17,12 @@
   "contributes": {
     "commands": [
       {
+        "command": "vs-code-file-status.file-information",
+        "title": "Show information",
+        "category": "Status",
+        "icon": "$(info)"
+      },
+      {
         "command": "vs-code-file-status.file-warning",
         "title": "Show warnings",
         "category": "Status",
@@ -31,6 +37,10 @@
     ],
     "menus": {
       "editor/title": [
+        {
+          "command": "vs-code-file-status.file-information",
+          "group": "navigation"
+        },
         {
           "command": "vs-code-file-status.file-warning",
           "group": "navigation"

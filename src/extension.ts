@@ -3,6 +3,13 @@ import { ListUtilities } from './list-utilities';
 
 export const activate = (context: vscode.ExtensionContext) => {
   context.subscriptions.push(
+    vscode.commands.registerCommand(
+      'vs-code-file-status.file-information',
+      () => jumpToFileStatus(vscode.DiagnosticSeverity.Information)
+    )
+  );
+
+  context.subscriptions.push(
     vscode.commands.registerCommand('vs-code-file-status.file-warning', () =>
       jumpToFileStatus(vscode.DiagnosticSeverity.Warning)
     )
@@ -22,24 +29,39 @@ const jumpToFileStatus = (severity: vscode.DiagnosticSeverity) => {
     return;
   }
 
-  const allWithStatus = vscode.languages
-    .getDiagnostics()[1][1]
-    .filter((r) => r.severity === severity);
+  const startLine = textEditor.selection.start.line;
 
-  const firstRowWithStatus = ListUtilities.minBy(
-    allWithStatus,
+  const allWithStatus = ListUtilities.orderBy(
+    vscode.languages
+      .getDiagnostics()[1][1]
+      .filter((r) => r.severity === severity),
     (p) => p.range.start.line
   );
 
-  textEditor.selection = new vscode.Selection(
-    firstRowWithStatus.range.start,
-    firstRowWithStatus.range.end
-  );
-  textEditor.revealRange(firstRowWithStatus.range);
+  const statusToJumpTo =
+    allWithStatus.find((aws) => aws.range.start.line > startLine) ??
+    allWithStatus[0];
 
-  allWithStatus.forEach((w) => {
-    vscode.window.showInformationMessage(JSON.stringify(w.message));
-  });
+  textEditor.selection = new vscode.Selection(
+    statusToJumpTo.range.start,
+    statusToJumpTo.range.end
+  );
+  textEditor.revealRange(statusToJumpTo.range);
+
+  if (severity === vscode.DiagnosticSeverity.Information) {
+    vscode.window.showInformationMessage(statusToJumpTo.message);
+    return;
+  }
+
+  if (severity === vscode.DiagnosticSeverity.Warning) {
+    vscode.window.showWarningMessage(statusToJumpTo.message);
+    return;
+  }
+
+  if (severity === vscode.DiagnosticSeverity.Error) {
+    vscode.window.showErrorMessage(statusToJumpTo.message);
+    return;
+  }
 };
 
 export const deactivate = () => {};
