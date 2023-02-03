@@ -2,7 +2,10 @@ import * as vscode from 'vscode';
 import { ListUtilities } from './list-utilities';
 
 export const activate = (context: vscode.ExtensionContext) => {
-  initIcons();
+  vscode.languages.onDidChangeDiagnostics(() =>
+    setIconsVisibility(vscode.window.activeTextEditor)
+  );
+  vscode.window.onDidChangeActiveTextEditor(setIconsVisibility);
 
   context.subscriptions.push(
     vscode.commands.registerCommand(
@@ -24,41 +27,36 @@ export const activate = (context: vscode.ExtensionContext) => {
   );
 };
 
-const initIcons = () =>
-  vscode.languages.onDidChangeDiagnostics(() => {
-    const textEditor = vscode.window.activeTextEditor;
+const setIconsVisibility = (textEditor: vscode.TextEditor | undefined) => {
+  if (!textEditor) {
+    return;
+  }
 
-    if (!textEditor) {
-      return;
-    }
+  const diagnostics = vscode.languages.getDiagnostics(textEditor.document.uri);
 
-    const diagnostics = vscode.languages.getDiagnostics(
-      textEditor.document.uri
-    );
+  const hasInformationStatus = diagnostics.some(
+    (r) => r.severity === vscode.DiagnosticSeverity.Information
+  );
+  vscode.commands.executeCommand(
+    'setContext',
+    'show-information',
+    hasInformationStatus
+  );
 
-    const hasInformationStatus = diagnostics.some(
-      (r) => r.severity === vscode.DiagnosticSeverity.Information
-    );
-    vscode.commands.executeCommand(
-      'setContext',
-      'show-information',
-      hasInformationStatus
-    );
+  const hasWarningStatus = diagnostics.some(
+    (r) => r.severity === vscode.DiagnosticSeverity.Warning
+  );
+  vscode.commands.executeCommand(
+    'setContext',
+    'show-warning',
+    hasWarningStatus
+  );
 
-    const hasWarningStatus = diagnostics.some(
-      (r) => r.severity === vscode.DiagnosticSeverity.Warning
-    );
-    vscode.commands.executeCommand(
-      'setContext',
-      'show-warning',
-      hasWarningStatus
-    );
-
-    const hasErrorStatus = diagnostics.some(
-      (r) => r.severity === vscode.DiagnosticSeverity.Error
-    );
-    vscode.commands.executeCommand('setContext', 'show-error', hasErrorStatus);
-  });
+  const hasErrorStatus = diagnostics.some(
+    (r) => r.severity === vscode.DiagnosticSeverity.Error
+  );
+  vscode.commands.executeCommand('setContext', 'show-error', hasErrorStatus);
+};
 
 const jumpToFileStatus = (severity: vscode.DiagnosticSeverity) => {
   const textEditor = vscode.window.activeTextEditor;
