@@ -29,6 +29,8 @@ const jumpToFileStatus = (severity: vscode.DiagnosticSeverity) => {
     return;
   }
 
+  vscode.commands.executeCommand('setContext', 'show-information', true);
+
   const startLine = textEditor.selection.start.line;
 
   const allWithStatus = ListUtilities.orderBy(

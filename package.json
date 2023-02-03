@@ -39,7 +39,8 @@
       "editor/title": [
         {
           "command": "vs-code-file-status.file-information",
-          "group": "navigation"
+          "group": "navigation",
+          "when": "show-information"
         },
         {
           "command": "vs-code-file-status.file-warning",
