@@ -65,14 +65,14 @@ const jumpToFileStatus = (severity: vscode.DiagnosticSeverity) => {
     return;
   }
 
-  const startLine = textEditor.selection.start.line;
-
   const allWithStatus = ListUtilities.orderBy(
     vscode.languages
       .getDiagnostics(textEditor.document.uri)
       .filter((r) => r.severity === severity),
     (p) => p.range.start.line
   );
+
+  const startLine = textEditor.selection.start.line;
 
   const statusToJumpTo =
     allWithStatus.find((aws) => aws.range.start.line > startLine) ??
