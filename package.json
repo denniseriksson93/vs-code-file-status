@@ -10,8 +10,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:vs-code-file-status.file-warning",
-    "onCommand:vs-code-file-status.file-error"
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -24,13 +23,13 @@
       },
       {
         "command": "vs-code-file-status.file-warning",
-        "title": "Show warnings",
+        "title": "Show warning",
         "category": "Status",
         "icon": "$(warning)"
       },
       {
         "command": "vs-code-file-status.file-error",
-        "title": "Show errors",
+        "title": "Show error",
         "category": "Status",
         "icon": "$(error)"
       }
@@ -44,11 +43,13 @@
         },
         {
           "command": "vs-code-file-status.file-warning",
-          "group": "navigation"
+          "group": "navigation",
+          "when": "show-warning"
         },
         {
           "command": "vs-code-file-status.file-error",
-          "group": "navigation"
+          "group": "navigation",
+          "when": "show-error"
         }
       ]
     }
