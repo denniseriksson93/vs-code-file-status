@@ -18,14 +18,14 @@
     "commands": [
       {
         "command": "vs-code-file-status.file-warning",
-        "title": "Hello World",
-        "category": "Hello",
+        "title": "Show warnings",
+        "category": "Status",
         "icon": "$(warning)"
       },
       {
         "command": "vs-code-file-status.file-error",
-        "title": "Hello World",
-        "category": "Hello",
+        "title": "Show errors",
+        "category": "Status",
         "icon": "$(error)"
       }
     ],
