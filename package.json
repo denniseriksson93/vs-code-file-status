@@ -1,7 +1,8 @@
 {
   "name": "vs-code-file-status",
-  "displayName": "Visual Studio Code - File Status",
+  "displayName": "File Status Stepper",
   "description": "Jump to the next information/warning/error without scrolling",
+  "publisher": "denniseriksson93",
   "icon": "images/example.png",
   "repository": {
     "type": "git",
