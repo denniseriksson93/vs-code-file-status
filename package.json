@@ -7,6 +7,7 @@
     "type": "git",
     "url": "https://github.com/denniseriksson93/vs-code-file-status"
   },
+  "license": "MIT",
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.74.0"
