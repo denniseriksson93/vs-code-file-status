@@ -8,7 +8,7 @@ This extension shows (if applicable) following icons in the top right corner
 
 For example if there is an image subfolder under your extension project workspace:
 
-![feature X](./images/example.png)
+![example](images/example.png)
 
 ## Extension Settings
 

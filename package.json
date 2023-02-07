@@ -1,8 +1,9 @@
 {
   "name": "vs-code-file-status",
-  "displayName": "vs-code-file-status",
-  "description": "",
-  "version": "0.0.1",
+  "displayName": "Visual Studio Code - File Status",
+  "description": "Jump to the next information/warning/error without scrolling",
+  "icon": "images/example.png",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.74.0"
   },
