@@ -32,8 +32,11 @@ const setIconsVisibility = (textEditor: vscode.TextEditor | undefined) => {
 };
 
 export const initSetIconsVisibility = () => {
-  vscode.languages.onDidChangeDiagnostics(() =>
+  const onDidChangeDiagnostics = vscode.languages.onDidChangeDiagnostics(() =>
     setIconsVisibility(vscode.window.activeTextEditor)
   );
-  vscode.window.onDidChangeActiveTextEditor(setIconsVisibility);
+  const onDidChangeActiveTextEditor =
+    vscode.window.onDidChangeActiveTextEditor(setIconsVisibility);
+
+  return [onDidChangeDiagnostics, onDidChangeActiveTextEditor];
 };
