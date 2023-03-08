@@ -6,13 +6,9 @@ This extension shows (if applicable) following icons in the top right corner
 - Warning
 - Error
 
-For example if there is an image subfolder under your extension project workspace:
+When a icon is pressed the editor will jump to the start line of the problem.
 
 ![example](images/example.png)
-
-## Extension Settings
-
-- `vs-code-file-status.toggle-notifications`: Enable/disable notifications.
 
 ## Release Notes
 
