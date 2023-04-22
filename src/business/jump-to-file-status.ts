@@ -26,21 +26,6 @@ const jumpToFileStatus = (severity: vscode.DiagnosticSeverity) => {
     statusToJumpTo.range.end
   );
   textEditor.revealRange(statusToJumpTo.range);
-
-  if (severity === vscode.DiagnosticSeverity.Information) {
-    vscode.window.showInformationMessage(statusToJumpTo.message);
-    return;
-  }
-
-  if (severity === vscode.DiagnosticSeverity.Warning) {
-    vscode.window.showWarningMessage(statusToJumpTo.message);
-    return;
-  }
-
-  if (severity === vscode.DiagnosticSeverity.Error) {
-    vscode.window.showErrorMessage(statusToJumpTo.message);
-    return;
-  }
 };
 
 export const initJumpToFileStatus = (context: vscode.ExtensionContext) => {
