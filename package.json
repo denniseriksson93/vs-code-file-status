@@ -24,19 +24,19 @@
     "commands": [
       {
         "command": "vs-code-file-status.file-information",
-        "title": "Show information",
+        "title": "Next information",
         "category": "Status",
         "icon": "$(info)"
       },
       {
         "command": "vs-code-file-status.file-warning",
-        "title": "Show warning",
+        "title": "Next warning",
         "category": "Status",
         "icon": "$(warning)"
       },
       {
         "command": "vs-code-file-status.file-error",
-        "title": "Show error",
+        "title": "Next error",
         "category": "Status",
         "icon": "$(error)"
       }
