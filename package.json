@@ -41,6 +41,23 @@
         "icon": "$(error)"
       }
     ],
+    "keybindings": [
+      {
+        "command": "vs-code-file-status.file-information",
+        "key": "shift+ctrl+alt+i",
+        "mac": "ctrl+alt+cmd+i"
+      },
+      {
+        "command": "vs-code-file-status.file-warning",
+        "key": "shift+ctrl+alt+w",
+        "mac": "ctrl+alt+cmd+w"
+      },
+      {
+        "command": "vs-code-file-status.file-error",
+        "key": "shift+ctrl+alt+e",
+        "mac": "ctrl+alt+cmd+e"
+      }
+    ],
     "menus": {
       "editor/title": [
         {

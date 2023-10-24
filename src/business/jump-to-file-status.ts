@@ -15,6 +15,10 @@ const jumpToFileStatus = (severity: vscode.DiagnosticSeverity) => {
     (p) => p.range.start.line
   );
 
+  if (allWithStatus.length <= 0) {
+    return;
+  }
+
   const startLine = textEditor.selection.start.line;
 
   const statusToJumpTo =
