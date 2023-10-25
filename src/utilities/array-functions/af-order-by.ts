@@ -8,36 +8,30 @@ export const afOrderBy = <T extends object, V extends SortingType>(
     return [];
   }
 
-  const selectorWithFallback =
-    selector ?? ((item: SortingType | object) => item);
-
-  if (typeof selectorWithFallback(items[0]) === 'number') {
+  if (typeof selector(items[0]) === 'number') {
     return [...items].sort(
       (a, b) =>
-        (selectorWithFallback(a) as unknown as number) -
-        (selectorWithFallback(b) as unknown as number)
+        (selector(a) as unknown as number) - (selector(b) as unknown as number)
     );
   }
 
-  if (selectorWithFallback(items[0]) instanceof Date) {
+  if (selector(items[0]) instanceof Date) {
     return [...items].sort(
       (a, b) =>
-        (selectorWithFallback(a) as unknown as Date).getTime() -
-        (selectorWithFallback(b) as unknown as Date).getTime()
+        (selector(a) as unknown as Date).getTime() -
+        (selector(b) as unknown as Date).getTime()
     );
   }
 
   return [...items].sort((a, b) => {
     if (
-      (selectorWithFallback(a) as unknown as string) >
-      (selectorWithFallback(b) as unknown as string)
+      (selector(a) as unknown as string) > (selector(b) as unknown as string)
     ) {
       return 1;
     }
 
     if (
-      (selectorWithFallback(a) as unknown as string) <
-      (selectorWithFallback(b) as unknown as string)
+      (selector(a) as unknown as string) < (selector(b) as unknown as string)
     ) {
       return -1;
     }
